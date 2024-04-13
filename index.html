@@ -3,6 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.45/moment-timezone-with-data-1970-2030.min.js"></script>
     <title>Shaz World Clock</title>
     <link rel="stylesheet" href="css/index.css" />
   </head>
@@ -16,14 +18,14 @@
         <option value="new-york">New York</option>
         <option value="los-angeles">Los Angeles</option>
       </select>
-      <div class="city">
+      <div class="city" id="berlin">
         <div>
           <h2>Berlin</h2>
           <div class="date">11th April 2024</div>
         </div>
         <div class="current-time">18:30:23 <small>PM</small></div>
       </div>
-      <div class="city">
+      <div class="city" id="lisbon">
         <div>
           <h2>Lisbon</h2>
           <div class="date">11th April 2024</div>
