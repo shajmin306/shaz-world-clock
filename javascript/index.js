@@ -23,4 +23,24 @@ function updateLisbonTime() {
     "HH:mm:ss [<small>]A[</small>]"
   );
 }
+
+function updateCity(event) {
+  let cityTimezone = event.target.value;
+  let cityName = cityTimezone.replace("_", " ").split("/")[1];
+  let cityTime = moment().tz(cityTimezone);
+  let citiesElement = document.querySelector("#cities");
+  citiesElement.innerHTML = ` <div class="city">
+          <div>
+            <h2>${cityTimezone}</h2>
+            <div class="date">${cityTime.format("MMMM Do YYYY")}</div>
+          </div>
+          <div class="current-time">${cityTime.format(
+            "HH:mm:ss [<small>]A[</small>]"
+          )}</div>
+        </div>
+  `;
+}
 setInterval(updateLisbonTime, 1000);
+
+let citiesSelect = document.querySelector("#city");
+citiesSelect.addEventListener("change", updateCity);
