@@ -23,9 +23,26 @@ function updateLisbonTime() {
     "HH:mm:ss [<small>]A[</small>]"
   );
 }
+setInterval(updateLisbonTime, 1000);
+
+function updateMadridTime() {
+  let madridElement = document.querySelector("#madrid");
+  let madridDateElement = madridElement.querySelector(".date");
+  let madridTimeElement = madridElement.querySelector(".current-time");
+  let madridDate = moment().tz("Europe/Madrid");
+
+  madridDateElement.innerHTML = madridDate.format("MMMM Do YYYY");
+  madridTimeElement.innerHTML = madridDate.format(
+    "HH:mm:ss [<small>]A[</small>]"
+  );
+}
+setInterval(updateMadridTime, 1000);
 
 function updateCity(event) {
   let cityTimezone = event.target.value;
+  if (cityTimezone === "current") {
+    cityTimezone = moment.tz.guess();
+  }
   let cityName = cityTimezone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimezone);
   let citiesElement = document.querySelector("#cities");
@@ -40,7 +57,6 @@ function updateCity(event) {
         </div>
   `;
 }
-setInterval(updateLisbonTime, 1000);
 
 let citiesSelect = document.querySelector("#city");
 citiesSelect.addEventListener("change", updateCity);
