@@ -40,8 +40,8 @@ setInterval(updateMadridTime, 1000);
 
 function updateCity(event) {
   let cityTimezone = event.target.value;
-  if (cityTimezone === "current") {
-    cityTimezone = moment.tz.guess();
+  if (cityTimezone === "Current") {
+    cityTimezone = moment().tz.guess();
   }
   let cityName = cityTimezone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimezone);
