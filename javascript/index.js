@@ -1,5 +1,8 @@
 function updateBerlinTime() {
   let berlinElement = document.querySelector("#berlin");
+  if (!berlinElement) {
+    return;
+  }
   let berlinDateElement = berlinElement.querySelector(".date");
   let berlinTimeElement = berlinElement.querySelector(".current-time");
   let berlinDate = moment().tz("Europe/Berlin");
@@ -14,6 +17,9 @@ setInterval(updateBerlinTime, 1000);
 
 function updateLisbonTime() {
   let lisbonElement = document.querySelector("#lisbon");
+  if (!lisbonElement) {
+    return;
+  }
   let lisbonDateElement = lisbonElement.querySelector(".date");
   let lisbonTimeElement = lisbonElement.querySelector(".current-time");
   let lisbonDate = moment().tz("Europe/Lisbon");
@@ -27,6 +33,9 @@ setInterval(updateLisbonTime, 1000);
 
 function updateMadridTime() {
   let madridElement = document.querySelector("#madrid");
+  if (!madridElement) {
+    return;
+  }
   let madridDateElement = madridElement.querySelector(".date");
   let madridTimeElement = madridElement.querySelector(".current-time");
   let madridDate = moment().tz("Europe/Madrid");
@@ -39,12 +48,21 @@ function updateMadridTime() {
 setInterval(updateMadridTime, 1000);
 
 function updateCity(event) {
+  clearInterval(interval);
+
   let cityTimezone = event.target.value;
   if (cityTimezone === "Current") {
-    cityTimezone = moment().tz.guess();
+    cityTimezone = moment.tz.guess();
   }
+
+  updateTime(cityTimezone);
+  interval = setInterval(() => updateTime(cityTimezone), 1000);
+}
+
+function updateTime(cityTimezone) {
   let cityName = cityTimezone.replace("_", " ").split("/")[1];
   let cityTime = moment().tz(cityTimezone);
+
   let citiesElement = document.querySelector("#cities");
   citiesElement.innerHTML = ` <div class="city">
           <div>
@@ -60,3 +78,5 @@ function updateCity(event) {
 
 let citiesSelect = document.querySelector("#city");
 citiesSelect.addEventListener("change", updateCity);
+
+let interval = null;
